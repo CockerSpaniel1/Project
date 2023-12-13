@@ -62,15 +62,15 @@ while ( $row = $dao->getRecord() ) {
 ?>
 <form action="shop.php" method="post">
    <input type="hidden" name="BookID" 
-          value="<?php echo $row["data-pid"] ?>"/>
+          value="<?php echo $row["Data_orderid"] ?>"/>
    <input type="hidden" name="BookTitle" 
-          value="<?php echo $row["data-name"] ?>"/>
+          value="<?php echo $row["Data_name"] ?>"/>
    <input type="hidden" name="BookPrice"
-          value="<?php echo $row["data-price"]; ?>"/>
+          value="<?php echo $row["Data_price"]; ?>"/>
 <tr bgcolor="<?php echo $color ?>">
-   <td><?php echo $row["data-pid"] ?></td>
-   <td><?php echo $row["data-name"] ?></td>
-   <td><?php echo $row["data-price"] ?></td>
+   <td><?php echo $row["Data_orderid"] ?></td>
+   <td><?php echo $row["Data_name"] ?></td>
+   <td><?php echo $row["Data_price"] ?></td>
    <td valign="top">
    <input type="text" size="5" name="Quantity" value="1"/>
    </td><td valign="top">
