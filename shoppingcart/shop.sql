@@ -39,12 +39,12 @@ CREATE TABLE `chocolate` (
 
 --
 -- 資料表的匯出資料 `books`
---**/
-
-INSERT INTO `chocolate` (`data-pid`, `data-name`, `data-brand`, `data-price`) VALUES
-/**('1423219500101', '義美杏仁巧克球(黑可可)117g', '義美', 89.0)
+--/**('1423219500101', '義美杏仁巧克球(黑可可)117g', '義美', 89.0)
 ('1423062400101', 'KitKat威化巧克力濃黑巧克力口味3入', 'KitKat', 39.0),
 ('1423113600101', '77乳加迷你量販包', '77', 129.0)**/
+
+INSERT INTO `chocolate` (`data-pid`, `data-name`, `data-brand`, `data-price`) 
+VALUES
 
 --
 -- 已匯出資料表的索引
