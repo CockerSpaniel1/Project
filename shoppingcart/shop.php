@@ -43,10 +43,10 @@ if ( isset($_POST["Order"]) ) {
 <?php
 // 插入函式庫的PHP檔案
 require_once("dataAccess.php");
-// 建立dataAccess物件的資料庫連接
+// 建立dataAccess物件的資料庫連接A12345678
 $dao = new dataAccess("localhost","root",
-                      "A12345678","product");
-$sql = "SELECT * FROM chocolate";  // 建立SQL指令字串
+                      "","product");
+$sql = "SELECT * FROM chocolate LIMIT 9" ;  // 建立SQL指令字串
 $dao->fetchDB($sql);  // 執行SQL查詢指令字串
 $flag = false;
 // 顯示資料庫內容

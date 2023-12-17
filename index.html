@@ -8,11 +8,56 @@
     <title>新手上路</title>
 
     <style>
-
-        .m_lazyload {
-            width: 0px;
-            height: 0px
+        * {background-color:lightgoldenrodyellow;
+            box-sizing: border-box; 
+            }
+        
+        #header{
+            border: 5px solid pink;
+            font-size: 26px;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
         }
+
+        
+        #content{
+            float:left;
+            height: 99vh;
+            border: 5px solid red;
+        }
+        .flex-container{ 
+            width: 910px;
+            border: 5px solid red;
+            display: flex;
+            float:right;
+            flex-wrap: wrap;
+            }
+        
+        .flex-container div {
+            padding:2px 10px;
+        }
+        
+        .product{
+            width: 300px;
+            border: 5px solid black;
+        }
+        .product_image {
+            width: 200px;
+            height: 200px;
+            border: 5px solid green;
+            background-color:red;
+            /* display: flex; */
+            /* float: left;  */
+            /* flex-direction: row */
+        }
+
+         .product_description {
+            
+            width: 200px;
+            /* height: 200px; */
+            /* clear: left; */
+             }  
     </style>
     <script>
 
@@ -85,10 +130,14 @@
 
 
     <div id="container">
-        <div id="header">
+        
+        <div id="header">這邊是標題&nbsp&nbsp不要再跑版了!
+            <img src="kuaikuai.jpg" width="100px" height="100px" style="float:right" >
+            
             <div id="site">
                 <!-- <h1>Chocolate Shop</h1> -->
-            </div>
+            
+            
 
             <!-- 巧克力品牌 義大利-->
             <!-- 全部商品 期間特價  季節限定 -->
@@ -96,34 +145,42 @@
             <!--搜尋列-->
             <!--登入 註冊-->
             <!-- <img src="https://online.carrefour.com.tw/dw/image/v2/BFHC_PRD/on/demandware.static/-/Sites-carrefour-tw-m-inner/default/dw2478794d/images/large/1423113600101_NR_00.jpg?sw=300&bgcolor=FFFFFF"> -->
+            </div>
+            
             <div id="nav">
+                 
                 <ul>
+                        
                     <!-- 巧克力歷史 巧克力介紹 巧克力品牌 關於我們 -->
                     <!-- <li><a href="#">巧克力歷史</a></li>
                     <li><a href="#">巧克力介紹</a></li>
                     <li><a href="#">巧克力品牌</a></li>
                     <li><a href="#">關於我們</a></li>
                     <li><a href="#">ABOUT US</a></li> -->
-
+      
+                    <li style="font-size:6px;list-style-type:none;">✞ Every day a Kuai Kuai may keep bug away ✞</li>
+                   
 
                 </ul>
             </div>
 
         </div>
-        <div id="content"></div>
+        <div id="content">這邊是商品清單欄位 不要再跑版了</div>
 
-        <div >
-            <div class="box-img">
-                <a  style="position: relative;"
-                    href="/zh/%E7%BE%A9%E7%BE%8E/1423219500101.html" data-pid="1423219500101" data-price="89.0"
-                     data-brand="義美" data-quantity="null"
+        <!-- <div >
+            <div class="product">
+                <a  
+                    href="/1423219500101.html" data-pid="1423219500101" 
+                     
                      data-name="義美杏仁巧克球(黑可可)117g">
-                    <img class="m_lazyload" src="images/1423219500101.jpg" alt="義美杏仁巧克球(黑可可)117g"
+
+                    <img class="product_image" src="images/1423219500101.jpg" alt="義美杏仁巧克球(黑可可)117g"
                         title="義美杏仁巧克球(黑可可)117g, ">
                 </a>
-            </div>
+            </div> 
+
             <div >
-                <div class="commodity-desc">
+                <div class="product_description">
                     <div>
                         <a href="/zh/%E7%BE%A9%E7%BE%8E/1423219500101.html"
                             title="義美杏仁巧克球(黑可可)117g">義美杏仁巧克球(黑可可)117g</a>
@@ -140,168 +197,148 @@
                 </div>
             </div>
 
-
-        </div>
-
-
-        
+        </div> -->
 
         <!-- 模板 -->
-        <!-- 2 -->
+        
 
         <!-- 先全部載入 翻頁功能 display none?  -->
         <!-- OR每一頁發送PHP 撈一次database -->
-        <div >
-            <div class="box-img">
-                <a  style="position: relative;"
-                    href=""   >
-                    <img class="m_lazyload" src="images/1423217800101.png" alt="義美杏仁巧克球117G" title="義美杏仁巧克球117G, ">義美杏仁巧克球117G
+    
+    <div class="flex-container">
+        <!-- 1 -->
+        <div class="product">
+            <div class="productup">
+                <a  href="/1423219500101.html">
+                    <img class="product_image" src="images/1423219500101.jpg" alt="義美杏仁巧克球(黑可可)117g" title="義美杏仁巧克球(黑可可)117g, ">
                 </a>
-            </div>
-
-            <div>
-                <div class="commodity-desc">
-                    <a href="" title=""></a>
-                </div>      
+            </div> 
+            <div class="product_description">
+                
+                <a href="" title="義美杏仁巧克球(黑可可)117g">義美杏仁巧克球(黑可可)117g</a>
+                
+                <div class="price"><em>$89</em><i></i></div>
             </div>
         </div>
-        <!-- 3 -->
-        <div >
-            <div class="box-img">
-                <a  style="display: none;"
-                    href=""   >
-                    <img class="m_lazyload" src="images/1423113600101_NR_00.jpg" alt="77乳加迷你量販包" title="77乳加迷你量販包, ">77乳加迷你量販包
-                    
+                
+        <!-- 2 -->
+        <div class="product">
+            <div class="productup">
+                <a href=""   >
+                    <img class="product_image" src="images/1423217800101.png" alt="義美杏仁巧克球117G" title="義美杏仁巧克球117G, "></a>
+            </div>
+            
+            <div class="product_description">
+                <a href="" >義美杏仁巧克球117G</a>
+            </div>      
+        </div>
+        <!-- 3 --><!-- <a!-- style="display: none;" -->
+        <div class="product">
+            <div class="productup">
+                    <img class="product_image" src="images/1423113600101_NR_00.jpg" alt="77乳加迷你量販包" title="77乳加迷你量販包, ">   
+            </div>    
+        
+            <div class="product_description">
+                <a href=""  title="">77乳加迷你量販包</a>
+            </div>
+            
+        </div>
+        <!-- 4 -->
+        <div class="product">
+            <div class="productup">
+                <a href=""   >
+                    <img class="product_image" src="images/14230448001.png" alt="甘百世大葡萄乾巧克力80g" title="甘百世大葡萄乾巧克力80g, ">
+                </a>
+            </div>
+            <div class="product_description">
+                    <a href=""  title="">甘百世大葡萄乾巧克力80g</a>
+            </div>
+            
+        </div> 
+    
+        <!-- 5 -->
+        <div class="product">
+            <div class="productup">
+                <a  href=""   >
+                    <img class="product_image" src="images/1423023900101.JPG" alt="[箱購] MMS花生糖衣巧克力284.9g x 12袋" title="MMS花生糖衣巧克力284.9g, ">
                 </a>
             </div>
             
             <div >
-
-                <div class="commodity-desc">
-                    <a href="" title=""></a>
+                <div class="product_description">
+                    <a href=""  title="">[箱購] MMS花生糖衣巧克力284.9g x 12袋</a>
+                     </div>
+            </div>
+        </div>
+        <!-- 6 -->
+        <div class="product">
+            <div class="productup">
+                <a  href=""   >
+                    <img class="product_image" src="images/1423012100101.jpg" alt="韓國樂天杏仁可可球46g" title="韓國樂天杏仁可可球46g, ">
+                </a>
+            </div>
+            <div >
+                <div class="product_description">
+                    <a href=""  title="">韓國樂天杏仁可可球46g</a>
                 </div>
             </div>
-        <!-- 4 -->
-        <div >
-            <div class="box-img">
-                <a  style="position: relative;"
-                    href=""   >
-                    <img class="m_lazyload" src="images/14230448001.png" alt="甘百世大葡萄乾巧克力80g" title="甘百世大葡萄乾巧克力80g, ">甘百世大葡萄乾巧克力80g
-                </a>
-            </div>
-            
-            <div >
-                <div class="commodity-desc">
-                    <a href=""  title=""></a>
-                     </div>
-            </div>
-        <!-- 5 -->
-        <div >
-            <div class="box-img">
-                <a  style="position: relative;"
-                    href=""   >
-                    
-                    <img class="m_lazyload" src="images/1423023900101.JPG" alt="[箱購] MMS花生糖衣巧克力284.9g x 12袋" title="MMS花生糖衣巧克力284.9g, ">[箱購] MMS花生糖衣巧克力284.9g x 12袋
-                </a>
-            </div>
-            
-            <div >
-
-                <div class="commodity-desc">
-                    <a href=""
-                            title=""></a>
-                     </div>
-            </div>
-        <!-- 6 -->
-        <div >
-            <div class="box-img">
-                <a  style="position: relative;"
-                    href=""   >
-            
-                    <img class="m_lazyload" src="images/1423012100101.jpg" alt="韓國樂天杏仁可可球46g" title="韓國樂天杏仁可可球46g, ">韓國樂天杏仁可可球46g
-                    
-                </a>
-            </div>
-            
-            <div >
-
-                <div class="commodity-desc">
-                    <a href=""
-                            title=""></a>
-                     </div>
-            </div>
+        </div>
         <!-- 7 -->
-        <div >
-            <div class="box-img">
-                <a  style="position: relative;"
-                    href=""   >
-                    
-                    <img class="m_lazyload" src="images/1423022700101.jpg" alt="義美葡萄QQ糖巧克球160g" title="義美葡萄QQ糖巧克球160g, ">義美葡萄QQ糖巧克球160g
+        <div class="product">
+            <div class="productup">
+                <a  href=""  ><img class="product_image" src="images/1423022700101.jpg" alt="義美葡萄QQ糖巧克球160g" title="義美葡萄QQ糖巧克球160g, ">
                 </a>
             </div>
             
-            <div >
-
-                <div class="commodity-desc">
-                    <a href=""
-                            title=""></a>
-                     </div>
+            <div class="product_description">
+                <a href="" title="">義美葡萄QQ糖巧克球160g</a>
             </div>
+          
+        </div> 
         <!-- 8 -->
-        <div >
-            <div class="box-img">
-                <a  style="position: relative;"
-                    href=""   >
-                    <img class="m_lazyload" src="images/1423053500101.jpg" alt="義美超大葡萄乾巧克力(牛奶巧克力)144g" title="義美超大葡萄乾巧克力(牛奶巧克力)144g, ">義美超大葡萄乾巧克力(牛奶巧克力)144g
-                    
+        <div class="product">
+            <div class="productup">
+                <a href=""   >
+                    <img class="product_image" src="images/1423053500101.jpg" alt="義美超大葡萄乾巧克力(牛奶巧克力)144g" title="義美超大葡萄乾巧克力(牛奶巧克力)144g, ">
                 </a>
             </div>
-            
             <div >
-
-                <div class="commodity-desc">
-                    <a href=""
-                            title=""></a>
-                     </div>
+                <div class="product_description">
+                    <a href="" title="">義美超大葡萄乾巧克力(牛奶巧克力)144g</a>
+                </div>
             </div>
+        </div>
         <!-- 9 -->
-        <div >
-            <div class="box-img">
-                <a  style="position: relative;"
-                    href=""   >
-                    
-                    <img class="m_lazyload" src="images/1423018300101.png" alt="健達繽紛樂(白)5入裝195g" title="健達繽紛樂(白)5入裝195g, ">健達繽紛樂(白)5入裝195g
-                    
+        <div class="product">
+            <div class="productup">
+                <a  href=""   >
+                    <img class="product_image" src="images/1423018300101.png" alt="健達繽紛樂(白)5入裝195g" title="健達繽紛樂(白)5入裝195g, ">
                 </a>
             </div>
             
-            <div >
-
-                <div class="commodity-desc">
-                    <a href=""
-                            title=""></a>
-                     </div>
+            <div class="product_description">
+                <a href="" title="">健達繽紛樂(白)5入裝195g </a>
             </div>
         </div>
 
-
-        <div id="footer"></div>
     </div>
+        <!-- d<div id="footer"></div> -->
+    
 
 
     
                 <!-- 模板 ---------------------------------------------------------------------------->
                         <!-- 2 -->
                         <!-- <div >
-                            <div class="box-img">
-                                <a  style="position: relative;"
+                            <div class="product">
+                                <a  
                                     href=""   >
-                                    <img class="m_lazyload" src="1423217800101.png" alt="義美杏仁巧克球117G" title="義美杏仁巧克球117G, ">
+                                    <img class="product_image" src="1423217800101.png" alt="義美杏仁巧克球117G" title="義美杏仁巧克球117G, ">
                                 </a>
                             </div>
 
                             <div >
-                                <div class="commodity-desc">
+                                <div class="product_description">
                                     <a href=""
                                             title=""></a>
                                     </div>
