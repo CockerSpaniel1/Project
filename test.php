@@ -1,5 +1,22 @@
-<?php
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to edit this template
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+    <form id="" name="" method="post" action="<?php $_SERVER['PHP_SELF'] ?>"  onsubmit="return fun1()">
+    
+      <input type="text"  id="" name=""   />
+      <input type="submit" id="" name="" value="搜尋" />
+    </form>
 
+
+<?php
 
 $servername = "localhost";
 $username = "root";
@@ -16,7 +33,7 @@ if ($conn->connect_error) {
 echo "Connected successfully <br>";
 
 // $sql = "SELECT * FROM chocolate";
-$sql = "SELECT * FROM chocolate LIMIT 20";
+$sql = "SELECT * FROM chocolate LIMIT 10";
 // $sql = "SELECT * FROM chocolate Where Data_name = '韓國樂天杏仁可可球46g' ";
 // $sql = "SELECT * FROM chocolate ORDER BY Data_price limit 10";
 $result = $conn->query($sql);
@@ -27,7 +44,7 @@ if ($result->num_rows > 0) {
     // echo  $row["Data_name"].  $row["Data_price"]."<br>";
     
     echo  "<img src=.\chocolate_images\\".$row['Data_pid'].".jpg alt='沒有圖片' width='100px'>";
-    echo  $row["Data_pid"].$row["Data_name"]."<br>";
+    echo  $row["Data_name"].$row["Data_price"]."<br>";
   }
 } else {
   echo "0 results";
@@ -51,3 +68,5 @@ $conn->close();
 //    }
    // 顯示選購商品的表單
 ?>
+ </body>
+ </html>
