@@ -9,7 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <title></title>
     </head>
         <script>
-            // document.getElement
+            document.getElement
         </script>
     <body>
     <img src="kuaikuai.jpg" width="100px" height="100px" style="float:left" title="這是張防Bug乖乖圖" alt="這是張防Bug乖乖圖" >
@@ -17,14 +17,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     //echo("<meta http-equiv='refresh' content='1'>");
     //echo date('H:i:s Y-m-d');
     ?>
-    
+    <div id="fortest">justfottest</div>
     <form id="f1" name="f1" method="get" action="<?php $_SERVER['PHP_SELF']?>">
         <input type="text" id="search_text" name="search_text" value="" placeholder="請輸入關鍵字或品牌名稱" />
         <input type="submit" id="search1" name="search1" value="搜尋" />
         <br>
         <select name="n_per_page" >
             <!-- onchange="showUser(this.value)" > -->
-            <option value="1">每頁顯示筆數</option>
+            <option value="" selected hidden>每頁顯示筆數</option>
+            <option value="1">1筆</option>
             <option value="5">5筆</option>
             <option value="10">10筆</option>
             <option value="15">15筆</option>
@@ -38,6 +39,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <input type="submit" id="order_highest" name="order_highest" value="價格:高到低" />
         <input type="submit" id="order_lowest" name="order_lowest" value="價格:低到高" />
         
+        
         <br>       
     <!-- <input type="text" id="i1" name="i11" value=""> -->
 
@@ -49,9 +51,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     $username = "root";
     $password = "";
     $dbname = "chocolate_db";
-
-
-    $n_per_page = 10;
+    
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -62,14 +62,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     echo "Connected successfully <br>";
 
     $conn->query("SET NAMES 'UTF8'");
-
-    $sql ="SELECT * FROM chocolate LIMIT ".$n_per_page;
-
+    //$n_per_page = 10;
+    //$sql ="SELECT * FROM chocolate LIMIT ".$n_per_page;
+    if (empty($_GET['n_per_page'])){
+        echo "test222";
+        $n_per_page = 10;
+    } else{
+        echo "test333";
+        $n_per_page = $_GET['n_per_page'];
+        echo "每頁筆數".$n_per_page;
+    }
+   
     //第一次載入時初始化start和end變數, 之後則是GET 表單submit之後的值
     if (empty($_GET['start_number']) && empty($_GET['end_number']) ){
         $start_number = 1;
         $end_number = 10;
         echo "初始化START & END";
+        $sql = "SELECT * FROM chocolate Where Data_orderid BETWEEN ".$start_number." and ".$end_number;
      }else {
         $start_number = $_GET['start_number'];
         $end_number = $_GET['end_number'];
@@ -78,6 +87,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
     //每一頁顯示筆數-預設為1-------------------------------------------------------------------------------------
     if (isset($_GET['submit1'])){
+        $n_per_page = $_GET['n_per_page'];
         $end_number = $start_number + $_GET['n_per_page'] - 1;
         $sql = "SELECT * FROM chocolate Where Data_orderid BETWEEN ".$start_number." and ".$end_number;
     };
@@ -87,7 +97,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         $sql = "SELECT * FROM chocolate WHERE Data_name LIKE '%".$_GET['search_text']."%' Limit 10";
     };
 
-    //下一頁和上一頁(10個商品)---------------------------------------------------------------
+    //下一頁和上一頁(n個商品)---------------------------------------------------------------
     if (isset($_GET['next1'])){
         $start_number += $n_per_page;
         $end_number += $n_per_page ;
@@ -112,7 +122,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     }else if (isset($_GET['order_lowest'])){
         $sql = "SELECT * FROM chocolate ORDER BY Data_price ASC limit 10";
     };
-    ;
+    echo $start_number."--".$end_number."--".$n_per_page;
     //---------------------------------------------------------------------------------------
     $result = $conn->query($sql);
     echo "<table border='5px'> ";
@@ -139,9 +149,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     
 
  ?>
-
         <input type="text" name="start_number"  value="<?php echo $start_number; ?>">
         <input type="text"  name="end_number"  value="<?php echo $end_number; ?>">
+        <input type="text"  name="n_per_page"  value="<?php echo $n_per_page; ?>">
+        
     </form>
 
 
