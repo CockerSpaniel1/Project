@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["favcolor"])){
+if (isset($_SESSION["favcolor"])){
     echo "NO";
     } else {
         echo $_SESSION["favcolor"];

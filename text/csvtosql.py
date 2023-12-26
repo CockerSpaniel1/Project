@@ -10,3 +10,4 @@ with open('product.csv', 'r',encoding='utf-8-sig') as csvfile:
             f.write(f"('{i[0]}','{i[1]}','{i[3]}',{i[2]})")
             f.write(",")
             
+
