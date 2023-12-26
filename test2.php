@@ -11,6 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <script>
             document.getElement
         </script>
+        <style>img {width:0px;}</style>
     <body>
     <img src="kuaikuai.jpg" width="100px" height="100px" style="float:left" title="這是張防Bug乖乖圖" alt="這是張防Bug乖乖圖" >
     <?php
@@ -49,7 +50,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <?php
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "A12345678";
     $dbname = "chocolate_db";
     
     // Create connection
@@ -60,16 +61,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         die("Connection failed: " . $conn->connect_error);
     }
     echo "Connected successfully <br>";
-
     $conn->query("SET NAMES 'UTF8'");
-    //$n_per_page = 10;
+
+    //$n_per_page = ;
     //$sql ="SELECT * FROM chocolate LIMIT ".$n_per_page;
-    if (empty($_GET['n_per_page'])){
-        echo "test222";
-        $n_per_page = 10;
+    if (empty($_GET['selected_n_per_page'])){
+        echo "test1 沒有GET n_per_page ";
+        //$n_per_page = 10;
     } else{
-        echo "test333";
-        $n_per_page = $_GET['n_per_page'];
+        echo "test2 有GET n_per_page";
+        $n_per_page = $_GET['selected_n_per_page'];
         echo "每頁筆數".$n_per_page;
     }
    
@@ -151,7 +152,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
  ?>
         <input type="text" name="start_number"  value="<?php echo $start_number; ?>">
         <input type="text"  name="end_number"  value="<?php echo $end_number; ?>">
-        <input type="text"  name="n_per_page"  value="<?php echo $n_per_page; ?>">
+        <input type="text"  name="selected_n_per_page"  value="<?php echo $n_per_page; ?>">
+        <input type="text"  name="testarray"  value="<?php echo $testarray=['123456']; ?>">
+
         
     </form>
 
