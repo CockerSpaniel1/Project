@@ -3,21 +3,68 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
-        <style>img {width:10px;}</style>
+        <title>新手上路2</title>
+        <style>
+            td img { width:0px;}
+            
+            * { background-color:lightgoldenrodyellow;
+                box-sizing: border-box; }
+
+            #header{
+                    border: 5px solid pink;
+                    height: 110px;
+                    font-size: 26px;
+                    font-weight: bold;
+                    font-style: italic;
+                    text-align: center;}
+            
+            #menu{
+                float:left;
+                height: 80vh;
+                border: 5px solid red; }
+
+            #flex-container{ 
+                width: 910px;
+                height: 80vh;
+                border: 5px solid green;
+                display: flex;
+                float:left;
+                flex-wrap: wrap;
+                }
+    
+    
+        </style>
     </head>
             
 <!--以下 HTML區域  -------------------------------------------------------------------------------------------------------------------------- -->        
     <body>    
-    <img src="kuaikuai.jpg" width="100px" height="100px" style="float:left" title="這是張防Bug乖乖圖" alt="這是張防Bug乖乖圖" >
-    <?php
-    //echo("<meta http-equiv='refresh' content='1'>");
-    //echo date('H:i:s Y-m-d');
-    ?>
-    <div id="fortest">justfortest</div> 
-            <!-- <h1>tset</h1> id="btnHide" -->
-    <input type="button"  onclick="functiontest(this.value)" value="義美"  >
+<div id="container">
+    <div id="header">
+        這邊是標題&nbsp&nbsp不要再跑版了
+        <img src="kuaikuai.jpg" width="100px" height="100px" style="float:left" title="這是張防Bug乖乖圖" alt="這是張防Bug乖乖圖" >
+    </div>
+    <div id="menu">這邊是巧克力品牌清單欄位 不要再跑版了
+        <div id="fortest">justfortest</div> 
+        <ul><li><input type="button"  onclick="functiontest(this.value)" value="義美" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="瑞士蓮" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="77" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="家樂福" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="LOTTE" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="甘百世" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="Hershey's" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="明治" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="露特" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="費列羅" ></li>
+            <li><input type="button"  onclick="functiontest(this.value)" value="健達" ></li>
+        </ul>
 
+        
+
+    
+    
+            <!-- <h1>tset</h1> id="btnHide" -->
+
+    
     <form id="f1" name="f1" method="get" action="<?php $_SERVER['PHP_SELF']?>">
         <input type="text" id="search_text" name="search_text" value="" placeholder="請輸入關鍵字或品牌名稱" />
         <input type="submit" id="search1" name="search1" value="搜尋" />
@@ -41,7 +88,8 @@
         <input type="submit" id="order_lowest" name="order_lowest" value="價格:低到高" />
         
         
-        <br>       
+        <br>
+        </div>       
     <!-- <input type="text" id="i1" name="i11" value=""> -->
 
 <!--以上 HTML區域  -------------------------------------------------------------------------------------------------------------------------- -->
@@ -59,7 +107,7 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "Connected successfully <br>";
+    //echo "Connected successfully <br>";
     $conn->query("SET NAMES 'UTF8'");
 
     
@@ -103,7 +151,7 @@
     if (isset($_GET['next1'])){
         $start_number += $num_per_page;
         $end_number += $num_per_page ;
-        //限制可查詢商品數 只到id:100 方便測試最後一頁      
+        //限制可查詢商品數 只到id:100 方便測試最後一頁 總共有425筆商品      
         if ($end_number > 100){
             $start_number = 100 - $num_per_page + 1;
             $end_number = 100;
@@ -134,20 +182,21 @@
 
     //進行SQL查詢---------------------------------------------------------------------------------------
     $result = $conn->query($sql);
-    var_dump($result);
-    echo "<div id='product_table'>";
+    
+    echo "<div id='flex-container'>";
     echo "<table border='5px'> ";
     if ($result->num_rows > 0) {
-    // output data of each row
-        echo "<tr><th>編號</th><th>圖片</th><th>品名</th><th>價格</th><th>購買數量</th><tr>";
+    
+        echo "<tr><th>編號</th><th>圖片</th><th>品名</th><th>價格</th><th>購買數量</th><th>加入購物車</th><th>test欄位</th><tr>";
         while($row = $result->fetch_assoc()) {
             // echo  $row["Data_name"].  $row["Data_price"]."<br>";
             
             echo "<tr><th>".$row['Data_orderid']."</th>";
             echo "<td><img src=./chocolate_images/".$row['Data_pid'].".jpg alt='沒有圖片' width='100px'></td>";
             echo "<td>".$row['Data_name']."</td><td>"."\$".$row['Data_price']."</td>";
-            //echo "<td><input type='number' id='quantity' name='quantity' value='0' min='0' max='99'></td>";
-            // echo "<td>&nbsp;&nbsp;&nbsp;0</td></tr>";
+            echo "<td><input type='number' id='quantity".$row['Data_orderid']."' name='quantity' value='0' min='0' max='99'></td>";
+            echo "<td><input type='button'  onclick='addProduct(this.name)' name='quantity".$row['Data_orderid']."' value='加入購物車'/></td>";
+            echo "<td><input type='text' value='[".$row['Data_orderid'].",".$row['Data_pid'].",".$row['Data_name'].",".$row['Data_price']." ]'/></td></tr>";
             
         }
     } else {
@@ -155,13 +204,14 @@
     }
 
     echo "</table>";
-    echo "</div>";
+    
 
     $result->close();
     $conn->close();
     
 
- ?>
+    ?>
+        </div>
         <!-- 下面三個start,end ,number 為第二次以後載入頁面，要列出的資料開頭 結束 及 每頁呈現筆數   -->
         <input type="text" name="start_number"  value="<?php echo $start_number; ?>">
         <input type="text"  name="end_number"  value="<?php echo $end_number; ?>">
@@ -170,53 +220,23 @@
 
         
     </form>
+    </div> 
 
 
-    <?php  
-    function search($text){
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "chocolate_db";
-    
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        $sql = "SELECT * FROM chocolate WHERE Data_name LIKE '%".$text."%' Limit 100";
-
-        $result = $conn->query($sql);
-        echo "<table border='5px'> ";
-        if ($result->num_rows > 0) {
-        
-            echo "<tr><th>編號</th><th>圖片</th><th>品名</th><th>價格</th><th>購買數量</th><tr>";
-            while($row = $result->fetch_assoc()) {
-                // echo  $row["Data_name"].  $row["Data_price"]."<br>";
-                
-                echo "<tr><th>".$row['Data_orderid']."</th>";
-                echo "<td><img src=./chocolate_images/".$row['Data_pid'].".jpg alt='沒有圖片' width='100px'></td>";
-                echo "<td>".$row['Data_name']."</td><td>"."\$".$row['Data_price']."</td>";
-                //echo "<td><input type='number' id='quantity' name='quantity' value='0' min='0' max='99'></td>";
-                // echo "<td>&nbsp;&nbsp;&nbsp;0</td></tr>";
-                
-            }
-
-        $result->close();
-        $conn->close();
-
-    
-        }
-    } 
-
-    //search('義美');
+    <?php 
+        $shoppingCart = ["productId"=>array("productName", "productPrice", "productQuantity") ];
+        $shoppingCart += [1,array(2,3,4)];
+        if ( empty($_SESSION["shoppingCart"])){
+        //$shoppingCart += [ "key"=> array(1,2,3,4)];
+        echo "沒有購物推車";    
+        print_r($shoppingCart);}
     ?>
 
+    
     <?php
-
+    //echo("<meta http-equiv='refresh' content='1'>");
+    //echo date('H:i:s Y-m-d');
     ?>
-
 <!--以上 PHP區域  -------------------------------------------------------------------------------------------------------------------------- -->
     
     <script>
@@ -224,31 +244,103 @@
                 // alert('Hello');
                 // document.getElementById("fortest").innerHTML= "123456";}
     </script>
+
+
     <!-- <script>
-        function showUser(str) {
+        function functiontest(str) {
+            alert("TEST");
             var xmlhttp = new XMLHttpRequest();
-            // xmlhttp.onreadystatechange = function() {
-            // if (this.readyState == 4 && this.status == 200) {
-            //     document.getElementById("txtHint").innerHTML = this.responseText;
-            // }
+            xmlhttp.onreadystatechange = function() {
+                console.log(this.readyState);
+                console.log(this.status);
+            if (this.readyState == 4 && this.status == 200) {
+                alert("TEST");
+                 document.getElementById("flex-container").innerHTML = this.responseText;
+             }
            
-            xmlhttp.open("GET","numberPerPage.php?num_per_page="+str,true);
+            xmlhttp.open("GET","searchDatabase.php?s1="+str,true);
             xmlhttp.send();
-        };
+            }; 
+        }
         
-
-    </script> -->
+        //functiontest("義美")
+    </script>  -->
     </body>
+    <!-- <a href="./searchDatabase.php?s1=義美" target="_blank">test123456</a> -->
 
 
-    <script type="text/javascript">
+    <?php require_once 'searchDatabase.php';?>
+<!--以下Javascript 區域  -------------------------------------------------------------------------------------------------------------------------- -->   
+    <script language="javascript" >
 
-// $("#btnHide").click(function(){
-// $("h1").hide();})
-//SELECT `chocolate`.`Data_brand`,COUNT(*) FROM `chocolate` Group BY `chocolate`.`Data_brand` ORDER BY COUNT(*) DESC;
-    function functiontest(test){
-        alert(test);
-        document.getElementById("product_table").innerHTML = "";
-        document.getElementById("product_table").innerHTML="<?php search($"瑞士蓮"); ?>";}
+    // $("#btnHide").click(function(){
+    // $("h1").hide();})
+    //SELECT `chocolate`.`Data_brand`,COUNT(*) FROM `chocolate` Group BY `chocolate`.`Data_brand` ORDER BY COUNT(*) DESC;
+
+    
+    function functiontest(text){
+        //alert(text);
+        
+        document.getElementById("flex-container").innerHTML = "";
+        switch (text){
+            case "義美":
+                console.log(text)
+                test = "<?php echo search('義美'); ?>"
+                break;
+            case "瑞士蓮":
+                console.log(text)
+                test = "<?php echo search('瑞士蓮'); ?>"
+                break;
+            case "77":
+                console.log(text)
+                test = "<?php echo search('77'); ?>"
+                break;
+            case "家樂福":
+                console.log(text)
+                test = "<?php echo search('家樂福'); ?>"
+                break;
+            case "LOTTE":
+                console.log(text)
+                test = "<?php echo search('LOTTE'); ?>"
+                break;
+            case "甘百世":
+               console.log(text)
+                test = "<?php echo search('甘百世'); ?>"    
+                break;
+            case "Hershey's":
+               console.log(text)
+                test = "<?php echo search('Hershey'); ?>"   
+                break;
+            case "明治":
+               console.log(text)
+                test = "<?php echo search('明治'); ?>"    
+                break;
+            case "露特":
+                console.log(text)
+                test = "<?php echo search('露特'); ?>"    
+                break;
+            case "費列羅":
+                console.log(text)
+                test = "<?php echo search('費列羅'); ?>"    
+                break;
+            case "健達":
+                console.log(text)
+                test = "<?php echo search('健達'); ?>"    
+                break;
+            default:
+                console.log("沒有符合的switch條件");
+        }
+        
+        document.getElementById("flex-container").innerHTML = test;
+    }
+
+    function addProduct(id){
+        alert("測試addProduct");
+        alert("this.name為"+id);
+        alert(document.getElementById(id).value); }
+        //location.href = "http://localhost:8080/Project/searchDatabase.php" ;}
+        
+        //location.href="./searchDatabase.php?s1=義美";}
+        //document.getElementById("flex-container").innerHTML ="<?//php search('義美'); ?>" ;}
     </script>
     </html>
