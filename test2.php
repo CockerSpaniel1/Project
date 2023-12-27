@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+    <?php //session_start(); ?>
     <head>
         <meta charset="UTF-8">
         <title>新手上路2</title>
@@ -62,10 +63,10 @@
 
     
     
-            <!-- <h1>tset</h1> id="btnHide" -->
+        <!-- <h1>tset</h1> id="btnHide" -->
 
     
-    <form id="f1" name="f1" method="get" action="<?php $_SERVER['PHP_SELF']?>">
+    <form id="f1" name="f1" method="post" action="<?php $_SERVER['PHP_SELF']?>">
         <input type="text" id="search_text" name="search_text" value="" placeholder="請輸入關鍵字或品牌名稱" />
         <input type="submit" id="search1" name="search1" value="搜尋" />
         <br>
@@ -96,6 +97,7 @@
 
 <!--以下 PHP區域  -------------------------------------------------------------------------------------------------------------------------- -->
     <?php
+    
     $servername = "localhost";
     $username = "root";
     $password = "A12345678";
@@ -113,42 +115,40 @@
     
     $sql ="SELECT * FROM chocolate LIMIT 10";
     //第一次載入時初始化每頁顯示資料筆數(num_per_page)為10，之後則是GET 表單submit之後的值
-    if (empty($_GET['num_per_page'])){
-        echo "test1 沒有GET num_per_page ";
+    if (empty($_POST['num_per_page'])){
+        //echo "test1 沒有GET num_per_page ";
         $num_per_page = 10;
     } else{
-        echo "test2 有GET num_per_page";
-        $num_per_page = $_GET['num_per_page'];
-        echo "每頁筆數".$num_per_page;
+        //echo "test2 有GET num_per_page";
+        $num_per_page = $_POST['num_per_page'];
     }
    
     //第一次載入時初始化start和end變數，之後則是GET 表單submit之後的值
-    if (empty($_GET['start_number']) && empty($_GET['end_number']) ){
+    if (empty($_POST['start_number']) && empty($_POST['end_number']) ){
         $start_number = 1;
         $end_number = 10;
-        echo "初始化START & END";
+        //echo "初始化START & END";
         $sql = "SELECT * FROM chocolate Where Data_orderid BETWEEN ".$start_number." and ".$end_number;
      } else {
-        $start_number = $_GET['start_number'];
-        $end_number = $_GET['end_number'];
-        echo "接收到START & END<br>";
+        $start_number = $_POST['start_number'];
+        $end_number = $_POST['end_number'];
+        //echo "接收到START & END<br>";
      };
 
     //每一頁顯示筆數-預設為10  如果有接收到清單選定的值則用變數接 然後再把變數submit出去以便第二次載入用--------------------------
-    if (isset($_GET['submit1']) && isset($_GET['selected_number'])){
-        echo "test456";
-        $num_per_page = $_GET['selected_number'];
-        $end_number = $start_number + $_GET['selected_number'] - 1;
+    if (isset($_POST['submit1']) && isset($_POST['selected_number'])){
+        $num_per_page = $_POST['selected_number'];
+        $end_number = $start_number + $_POST['selected_number'] - 1;
         $sql = "SELECT * FROM chocolate Where Data_orderid BETWEEN ".$start_number." and ".$end_number;
     };
     
     //搜尋功能- 按下搜尋鍵且不為空字串--------------------------------------------------------------------------------------
-    if (isset($_GET['search1']) && isset($_GET['search_text']))  {
-        $sql = "SELECT * FROM chocolate WHERE Data_name LIKE '%".$_GET['search_text']."%' Limit 10";
+    if (isset($_POST['search1']) && isset($_POST['search_text']))  {
+        $sql = "SELECT * FROM chocolate WHERE Data_name LIKE '%".$_POST['search_text']."%' Limit 10";
     };
 
     //下一頁和上一頁(n個商品)------------------------------------------------------------------------------------------------
-    if (isset($_GET['next1'])){
+    if (isset($_POST['next1'])){
         $start_number += $num_per_page;
         $end_number += $num_per_page ;
         //限制可查詢商品數 只到id:100 方便測試最後一頁 總共有425筆商品      
@@ -159,7 +159,7 @@
         // echo $start_number.$end_number;
         $sql = "SELECT * FROM chocolate WHERE Data_orderid BETWEEN ".$start_number." and ".$end_number;
     
-    }elseif(isset($_GET['previous1'])){
+    }elseif(isset($_POST['previous1'])){
         
         $start_number -= $num_per_page;
         $end_number -= $num_per_page ;
@@ -172,13 +172,12 @@
         $sql = "SELECT * FROM chocolate WHERE Data_orderid BETWEEN ".$start_number." and ".$end_number;
     }
     //排序-----------------------------------------------------------------------------------
-    if (isset($_GET['order_highest'])){
+    if (isset($_POST['order_highest'])){
         $sql = "SELECT * FROM chocolate Where Data_orderid BETWEEN 1 and 100  ORDER BY Data_price DESC limit 100";
-    }else if (isset($_GET['order_lowest'])){
+    }else if (isset($_POST['order_lowest'])){
         $sql = "SELECT * FROM chocolate Where Data_orderid BETWEEN 1 and 100  ORDER BY Data_price ASC limit 100";
     };
-    echo $start_number."--".$end_number."--".$num_per_page;
-
+    //echo $start_number."--".$end_number."--".$num_per_page;
 
     //進行SQL查詢---------------------------------------------------------------------------------------
     $result = $conn->query($sql);
@@ -194,9 +193,10 @@
             echo "<tr><th>".$row['Data_orderid']."</th>";
             echo "<td><img src=./chocolate_images/".$row['Data_pid'].".jpg alt='沒有圖片' width='100px'></td>";
             echo "<td>".$row['Data_name']."</td><td>"."\$".$row['Data_price']."</td>";
+
             echo "<td><input type='number' id='quantity".$row['Data_orderid']."' name='quantity' value='0' min='0' max='99'></td>";
-            echo "<td><input type='button'  onclick='addProduct(this.name)' name='quantity".$row['Data_orderid']."' value='加入購物車'/></td>";
-            echo "<td><input type='text' value='[".$row['Data_orderid'].",".$row['Data_pid'].",".$row['Data_name'].",".$row['Data_price']." ]'/></td></tr>";
+            echo "<td><input type='button'  onclick='addProduct(this.name)' name='button".$row['Data_orderid']."' value='加入購物車'/></td>";
+            echo "<td><input type='text' id='productArray".$row['Data_orderid']."' value='[".$row['Data_orderid'].",".$row['Data_pid'].",".$row['Data_name'].",".$row['Data_price']." ]'/></td></tr>";
             
         }
     } else {
@@ -213,27 +213,38 @@
     ?>
         </div>
         <!-- 下面三個start,end ,number 為第二次以後載入頁面，要列出的資料開頭 結束 及 每頁呈現筆數   -->
-        <input type="text" name="start_number"  value="<?php echo $start_number; ?>">
-        <input type="text"  name="end_number"  value="<?php echo $end_number; ?>">
-        <input type="text"  name="num_per_page"  value="<?php echo $num_per_page; ?>">
+        <input type="hidden" name="start_number"  value="<?php echo $start_number; ?>">
+        <input type="hidden"  name="end_number"  value="<?php echo $end_number; ?>">
+        <input type="hidden"  name="num_per_page"  value="<?php echo $num_per_page; ?>">
         <!-- <input type="text"  name="testarray"  value="<?//php echo $testarray=['123456']; ?>"> -->
-
         
+        <!-- <input type="text"  name="shoppingCart"  value="<?php //print_r($shoppingCart); ?>"> -->
     </form>
     </div> 
-
-
-    <?php 
-        $shoppingCart = ["productId"=>array("productName", "productPrice", "productQuantity") ];
-        $shoppingCart += [1,array(2,3,4)];
-        if ( empty($_SESSION["shoppingCart"])){
-        //$shoppingCart += [ "key"=> array(1,2,3,4)];
-        echo "沒有購物推車";    
-        print_r($shoppingCart);}
-    ?>
-
-    
+    <?php   
+        // if (!isset($_SESSION["shoppingCart"])){
+        //     $shoppingCart = [ ];
+        // } else {
+        //     print_r($_SESSION["shoppingCart"]);
+        //     $shoppingCart = $_SESSION["shoppingCart"];
+        // }
+        // $shoppingCart = ["productId"=>array("productName", "productPrice", "productQuantity") ];   
+        // $_SESSION["shoppingCart"] = $shoppingCart ?>
     <?php
+         
+         //$shoppingCart = ["productId"=>array("productName", "productPrice", "productQuantity") ];
+        //$shoppingCart += [1,array(2,3,4)];
+        // if (!empty($_POST["shoppingCart"])){
+        //     $shoppingCart = [ ];
+        // echo "沒有購物推車";    
+        // print_r($shoppingCart);}
+        //if (isset($_SESSION["shoppingCart"]))
+        //{echo "YES";}else{echo "NO";}
+        ?>
+
+        
+    <?php
+    
     //echo("<meta http-equiv='refresh' content='1'>");
     //echo date('H:i:s Y-m-d');
     ?>
@@ -280,52 +291,52 @@
     
     function functiontest(text){
         //alert(text);
-        
+
         document.getElementById("flex-container").innerHTML = "";
         switch (text){
             case "義美":
                 console.log(text)
-                test = "<?php echo search('義美'); ?>"
+                test = "<?php echo searchBrand('義美'); ?>"
                 break;
             case "瑞士蓮":
                 console.log(text)
-                test = "<?php echo search('瑞士蓮'); ?>"
+                test = "<?php echo searchBrand('瑞士蓮'); ?>"
                 break;
             case "77":
                 console.log(text)
-                test = "<?php echo search('77'); ?>"
+                test = "<?php echo searchBrand('77'); ?>"
                 break;
             case "家樂福":
                 console.log(text)
-                test = "<?php echo search('家樂福'); ?>"
+                test = "<?php echo searchBrand('家樂福'); ?>"
                 break;
             case "LOTTE":
                 console.log(text)
-                test = "<?php echo search('LOTTE'); ?>"
+                test = "<?php echo searchBrand('LOTTE'); ?>"
                 break;
             case "甘百世":
                console.log(text)
-                test = "<?php echo search('甘百世'); ?>"    
+                test = "<?php echo searchBrand('甘百世'); ?>"    
                 break;
             case "Hershey's":
                console.log(text)
-                test = "<?php echo search('Hershey'); ?>"   
+                test = "<?php echo searchBrand('Hershey'); ?>"   
                 break;
             case "明治":
                console.log(text)
-                test = "<?php echo search('明治'); ?>"    
+                test = "<?php echo searchBrand('明治'); ?>"    
                 break;
             case "露特":
                 console.log(text)
-                test = "<?php echo search('露特'); ?>"    
+                test = "<?php echo searchBrand('露特'); ?>"    
                 break;
             case "費列羅":
                 console.log(text)
-                test = "<?php echo search('費列羅'); ?>"    
+                test = "<?php echo searchBrand('費列羅'); ?>"    
                 break;
             case "健達":
                 console.log(text)
-                test = "<?php echo search('健達'); ?>"    
+                test = "<?php echo searchBrand('健達'); ?>"    
                 break;
             default:
                 console.log("沒有符合的switch條件");
@@ -333,11 +344,28 @@
         
         document.getElementById("flex-container").innerHTML = test;
     }
+    
+    function addProduct(buttonName){
+        //按下Button後取得目前Batton的name(第幾個按鈕)，再用name轉換成(input)欄位的ID去查詢購買數量
+        alert("this.name為"+buttonName);
+        let quantityId = buttonName.replace("button","quantity");
+        let quantity = document.getElementById(quantityId).value;
+        alert("購買數量為" + quantity); 
 
-    function addProduct(id){
-        alert("測試addProduct");
-        alert("this.name為"+id);
-        alert(document.getElementById(id).value); }
+        let productArrayId = buttonName.replace("button","productArray")
+        //alert("Array"+document.getElementById(productArrayId).value); 
+        let stringArray = document.getElementById(productArrayId).value;
+        let productArray = stringArray.slice(1, -1).split(",");
+        productArray.push(quantity);
+
+        // for (a in productArray) {
+        //     alert(productArray[a]);
+        // }
+ 
+        location.href=`./getsession.php?shoppingItem=${productArray}`
+        }
+
+
         //location.href = "http://localhost:8080/Project/searchDatabase.php" ;}
         
         //location.href="./searchDatabase.php?s1=義美";}

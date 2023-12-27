@@ -1,12 +1,6 @@
-<script>
-alert("載入searchDatabase")
-</script>
+
 <?php  
-    //$score1=$_GET["s1"];
-    echo "HIHI";
-    
-    //$str = "987654321";
-    function search($text){
+    function searchBrand($text){
         $str = "";
         $servername = "localhost";
         $username = "root";
