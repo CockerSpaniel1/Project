@@ -19,7 +19,7 @@
         echo  "<table border='5px'> ";
         if ($result->num_rows > 0) {
         
-            echo  "<tr><th>編號1</th><th>圖片</th><th>品名</th><th>價格</th><th>購買數量</th><tr>";
+            echo  "<tr><th>編號</th><th>圖片</th><th>品名</th><th>價格</th><th>購買數量</th><tr>";
             while($row = $result->fetch_assoc()) {
                 // echo   $row["Data_name"].  $row["Data_price"]."<br>";
                 

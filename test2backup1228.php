@@ -12,19 +12,13 @@
                 box-sizing: border-box; }
 
             #header{
-                    margin:5px 100px;
+                    margin:5px 70px;
                     border: 5px solid pink;
                     height: 110px;
                     font-size: 26px;
                     font-weight: bold;
                     font-style: italic;
                     text-align: center;}
-
-            #content { 
-                margin:0px 100px;
-                height: 80vh;
-                border: 5px solid black;}
-
             
             #menu{
                 float:left;
@@ -32,34 +26,21 @@
                 border: 5px solid red; }
 
             #flex-container{ 
-                /* width: 910px; */
+                width: 910px;
                 /* height: 80vh; */
                 border: 5px solid green;
                 display: flex;
-                float:right;
-                flex-wrap: wrap;
-                
-                }
-            #product{ 
-                /* width: 910px; */
-                /* height: 80vh; */
-                border: 5px solid blue;
-                display: flex;
                 float:left;
-                flex-wrap: wrap;  
+                flex-wrap: wrap;
                 }
-            #input_div{
-                
-                background-color: orange;
-                /* display:inline-block;" */
-                display: flex;
-                width:900;
-            }
     
             li { margin:5px;
                 list-style-type:none;                
                 }
-            
+            #content { 
+                margin:0px 70px;
+                height: 80vh;
+                border: 5px solid black;}
         </style>
     </head>
             
@@ -93,8 +74,8 @@
 
     
     <form id="f1" name="f1" method="post" action="<?php $_SERVER['PHP_SELF']?>">
-        <!-- <input type="text" id="search_text" name="search_text" value="" placeholder="請輸入關鍵字或品牌名稱" /> -->
-        <!-- <input type="submit" id="search1" name="search1" value="搜尋" /> -->
+        <input type="text" id="search_text" name="search_text" value="" placeholder="請輸入關鍵字或品牌名稱" />
+        <input type="submit" id="search1" name="search1" value="搜尋" />
         <br>
         <select name="selected_number" >
             <!-- onchange="showUser(this.value)" > -->
@@ -206,23 +187,11 @@
         $sql = "SELECT * FROM chocolate Where Data_orderid BETWEEN 1 and 100  ORDER BY Data_price ASC limit 100";
     };
     //echo $start_number."--".$end_number."--".$num_per_page;
-    ?>
-    <div id="input_div2" >
-            <input type="text" id="search_text" name="search_text" value="" placeholder="請輸入關鍵字或品牌名稱" />
-            <input type="submit" id="search1" name="search1" value="搜尋" />
-        </div>
-    <div id='flex-container' >
-        <!-- <div id="input_div" >
-            <input type="text" id="search_text" name="search_text" value="" placeholder="請輸入關鍵字或品牌名稱" />
-            <input type="submit" id="search1" name="search1" value="搜尋" />
-        </div> -->
 
-    <?php
     //進行SQL查詢---------------------------------------------------------------------------------------
     $result = $conn->query($sql);
     
-//    echo "<div id='flex-container'>";
-    echo "<div id='product'>";
+    echo "<div id='flex-container'>";
     echo "<table border='5px' > ";
     if ($result->num_rows > 0) {
     
