@@ -1,3 +1,7 @@
+#這用來整理圖片檔名的檔案 把雜七雜八的檔名還有副檔名(jpeg)修改成 產品ID.jpg 格式
+#部分png則是用線上轉jpg後 再來這邊整理
+
+
 import os
 path = os.getcwd()
 print(path)

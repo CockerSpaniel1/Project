@@ -28,6 +28,7 @@
 
             
             #menu{
+                /* width:10vw   ; */
                 float:left;  
                 border: 5px solid red; 
             }
@@ -49,13 +50,6 @@
                 float:left;
                 flex-wrap: wrap;  
                 }
-            #input_div{
-                /* color: orange; */
-                /* display:inline-block;" */
-                /* display: flex; */
-                /* float:right ; */
-                /* width:900; */
-            }
     
             li { margin:5px;
                 list-style-type:none;                
@@ -83,8 +77,8 @@
     <body>    
 <div id="page">
     <div id="header">
-        <h1>這邊是標題&nbsp&nbsp不要再跑版了</h1>
-        <!-- <img src="kuaikuai.jpg" width="100px" height="100px" style="float:left" title="這是張防Bug乖乖圖" alt="這是張防Bug乖乖圖" > -->
+        <h1>巧克力專賣店</h1>
+        <!-- <img src="kuaikuai.jpg" width="100px" height="100px" style="float:left"  alt="這是張防Bug乖乖圖" > -->
     </div>
 
     <div id="middle">
@@ -191,7 +185,7 @@
     
     //搜尋功能- 按下搜尋鍵且不為空字串--------------------------------------------------------------------------------------
     if (isset($_POST['search1']) && isset($_POST['search_text']))  {
-        $sql = "SELECT * FROM chocolate WHERE Data_name LIKE '%".$_POST['search_text']."%' Limit 10";
+        $sql = "SELECT * FROM chocolate WHERE Data_name LIKE '%".$_POST['search_text']."%' ";
     };
 
     //下一頁和上一頁(n個商品)------------------------------------------------------------------------------------------------
@@ -252,11 +246,11 @@
             // echo "<td><input type='button'  onclick='addProduct(this.name)' name='button".$row['Data_orderid']."' value='加入購物車'/></td>";
             // echo "<input type='hidden' id='productArray".$row['Data_orderid']."' value='[".$row['Data_orderid'].",".$row['Data_pid'].",".$row['Data_name'].",".$row['Data_price']." ]'/></tr>";
             
-            //-----九宮格呈現模式------------------------------------------------------------------------------------------------------------------
+            //-----方塊呈現模式------------------------------------------------------------------------------------------------------------------
             echo "<div class='product'><div class='productup'><a  href='#'>";
             echo "<img class='product_image' src='./chocolate_images/".$row['Data_pid'].".jpg' alt='".$row['Data_name']."' title='".$row['Data_name']."' >";
             echo "</a></div>";
-            echo "<div class='product_description'><a href='#' title='".$row['Data_name']."'>'".$row['Data_name']."</a>";
+            echo "<div class='product_description'><a href='#' title='".$row['Data_name']."'>".$row['Data_name']."</a>";
             echo "<div class='price'><em>"."\$".$row['Data_price']."</em><i></i></div>";
 
             echo "<label>購買數量: <input type='number' id='quantity".$row['Data_orderid']."' name='quantity' value='0' min='0' max='99'></label>";

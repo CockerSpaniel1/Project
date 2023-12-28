@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新手上路</title>
+
+    <style>
+
+        .m_lazyload {
+            width: 0px;
+            height: 0px
+        }
+    </style>
+</head>
+
+<body>
+    <!--  -->
+    
+    <button id="btn">LOAD</button>
+    <div id="demo"></div>
+
+    <script>
+        btn.onclick=function(){
+            loadJSON();
+        }
+    
+    function loadJSON(){
+        var url="test.json"
+        var xhr= new XMLHttpRequest()
+        xhr.onreadystatechange =function(){
+            if (xhr.readyState===4 && this.status===200){
+                var obj=xhr.response
+                var str=""
+                console.log(obj)
+                //pid, 品名，價格，數量，圖檔路徑
+
+                demo.innerHTML= JSON.stringify(obj)
+                str ="<hr>名稱 :"+ obj['data']['id'] + "<br>"
+                str ="<hr>名稱 :"+ obj['data']['type'] + "<br>"
+                str ="<hr>名稱 :"+ obj['pid'] + "<br>"
+                    // +"中文名稱 :"+ obj['chiName'] + "<br>"
+                
+
+                // str +="卡司<ul>";
+                //     obj['cast'].forEach(e => {
+                //         str +="<li>" + e +"</li>";
+                //     });
+                // str+= "</ul>"
+
+
+
+                demo.innerHTML = str
+            }
+        }
+        xhr.responseType="json"
+        xhr.open('get',url ,true)
+        xhr.send()
+        }
+    </script>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="container">
+        <div id="header">
+            <div id="site">
+                <!-- <h1>Chocolate Shop</h1> -->
+            </div>
+
+            <!-- 巧克力品牌 義大利-->
+            <!-- 全部商品 期間特價  季節限定 -->
+            <!-- 首頁/糖果/巧克力 -->
+            <!--搜尋列-->
+            <!--登入 註冊-->
+            <!-- <img src="https://online.carrefour.com.tw/dw/image/v2/BFHC_PRD/on/demandware.static/-/Sites-carrefour-tw-m-inner/default/dw2478794d/images/large/1423113600101_NR_00.jpg?sw=300&bgcolor=FFFFFF"> -->
+            <div id="nav">
+                <ul>
+                    <!-- 巧克力歷史 巧克力介紹 巧克力品牌 關於我們 -->
+                    <!-- <li><a href="#">巧克力歷史</a></li>
+                    <li><a href="#">巧克力介紹</a></li>
+                    <li><a href="#">巧克力品牌</a></li>
+                    <li><a href="#">關於我們</a></li>
+                    <li><a href="#">ABOUT US</a></li> -->
+
+                <!-- 模板 ---------------------------------------------------------------------------->
+                        <!-- 2 -->
+                        <!-- <div class="hot-recommend-item line">
+                            <div class="box-img">
+                                <a class="gtm-product-alink" style="position: relative;"
+                                    href="" data-pid="" data-price="" >
+                                    <img class="m_lazyload" src="1423217800101.png" alt="義美杏仁巧克球117G" title="義美杏仁巧克球117G, ">
+                                </a>
+                            </div>
+
+                            <div class="desc-operation-wrapper">
+
+                                <div class="commodity-desc">
+                                    <a href=""
+                                            title=""></a>
+                                    </div>
+                            </div>
+                        </div> -->
+
+
+                </ul>
+            </div>
+
+        </div>
+        <div id="content"></div>
+
+
+        <div class="hot-recommend-item line">
+            <!-- dwMarker="product" dwContentID="27fd4216a46a7b9c696448afde" -->
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="/zh/%E7%BE%A9%E7%BE%8E/1423219500101.html" data-pid="1423219500101" data-price="89.0"
+                    data-baseprice="89.0" data-category="飲料零食/糖果．巧克力．口香糖/巧克力/果核巧克力" data-brand="義美" data-quantity="null"
+                    data-variant="117g克 x 1 x 1Bag包" data-name="義美杏仁巧克球(黑可可)117g" data-ifavailable="true">
+                    <img class="m_lazyload" src="images/1423219500101.jpg" alt="義美杏仁巧克球(黑可可)117g"
+                        title="義美杏仁巧克球(黑可可)117g, ">
+                </a>
+            </div>
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <div>
+                        <a href="/zh/%E7%BE%A9%E7%BE%8E/1423219500101.html"
+                            title="義美杏仁巧克球(黑可可)117g">義美杏仁巧克球(黑可可)117g</a>
+                    </div>
+                    <!-- <div class="little-label">
+                        <span class="active-desc yellow-bg">滿額折</span>
+                        <span class="active-desc yellow-bg">滿額送$30</span>
+                    </div> -->
+
+                </div>
+                <div class="commodity-operation">
+                    <div class="price-shopcart">
+                        <div class="price-layout">
+                            <!-- <div class="original-price"><i>$ 110</i></div> -->
+                            <div class="current-price"><em>$89</em><i></i></div>
+                        </div>
+                        <div class="favorite">
+
+                            <!-- <div class="like 1423219500101" data-likepid="1423219500101" data-price="89.0"
+                                data-baseprice="89.0" data-category="飲料零食/糖果．巧克力．口香糖/巧克力/果核巧克力" data-brand="義美"
+                                data-variant="117g克 x 1 x 1Bag包" data-name="義美杏仁巧克球(黑可可)117g">
+                                <img src="/on/demandware.static/Sites-Carrefour-Site/-/default/dw548b43ae/images/icon-favorite-w.svg"
+                                    alt="" class="hand-cursor 1423219500101">
+                            </div> -->
+                            <!-- 小購物車 -->
+                            <!-- <div class="shopcart add-to-cart gtm-addToCart"
+                                data-url="https://online.carrefour.com.tw/on/demandware.store/Sites-Carrefour-Site/default/Cart-AddProduct"
+                                data-pid="1423219500101" data-price="89.0" data-baseprice="89.0"
+                                data-category="飲料零食/糖果．巧克力．口香糖/巧克力/果核巧克力" data-brand="義美"
+                                data-variant="117g克 x 1 x 1Bag包" data-name="義美杏仁巧克球(黑可可)117g" data-ifavailable="true"
+                                data-quantity="1" style="background-color: rgb(46, 91, 255);"><a
+                                    href="javascript:;"><img
+                                        src="/on/demandware.static/Sites-Carrefour-Site/-/default/dw98ae91ff/images/icon-w-cart.svg"
+                                        alt="義美杏仁巧克球(黑可可)117g"></a></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        
+
+        <!-- 模板 -->
+        <!-- 2 -->
+        <div class="hot-recommend-item line">
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="" data-pid="" data-price="" >
+                    <img class="m_lazyload" src="images/1423217800101.png" alt="義美杏仁巧克球117G" title="義美杏仁巧克球117G, ">義美杏仁巧克球117G
+                </a>
+            </div>
+
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <a href=""
+                            title=""></a>
+                     </div>
+
+
+                    
+            </div>
+        </div>
+        <!-- 3 -->
+        <div class="hot-recommend-item line">
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="" data-pid="" data-price="" >
+                    <img class="m_lazyload" src="images/1423113600101_NR_00.jpg" alt="77乳加迷你量販包" title="77乳加迷你量販包, ">77乳加迷你量販包
+                    
+                </a>
+            </div>
+            
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <a href=""
+                            title=""></a>
+                     </div>
+            </div>
+        <!-- 4 -->
+        <div class="hot-recommend-item line">
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="" data-pid="" data-price="" >
+                    
+                    <img class="m_lazyload" src="images/14230448001.png" alt="甘百世大葡萄乾巧克力80g" title="甘百世大葡萄乾巧克力80g, ">甘百世大葡萄乾巧克力80g
+                </a>
+            </div>
+            
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <a href=""
+                            title=""></a>
+                     </div>
+            </div>
+        <!-- 5 -->
+        <div class="hot-recommend-item line">
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="" data-pid="" data-price="" >
+                    
+                    <img class="m_lazyload" src="images/1423023900101.JPG" alt="[箱購] MMS花生糖衣巧克力284.9g x 12袋" title="MMS花生糖衣巧克力284.9g, ">[箱購] MMS花生糖衣巧克力284.9g x 12袋
+                </a>
+            </div>
+            
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <a href=""
+                            title=""></a>
+                     </div>
+            </div>
+        <!-- 6 -->
+        <div class="hot-recommend-item line">
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="" data-pid="" data-price="" >
+                    
+                    <img class="m_lazyload" src="images/1423012100101.jpg" alt="韓國樂天杏仁可可球46g" title="韓國樂天杏仁可可球46g, ">韓國樂天杏仁可可球46g
+                    
+                </a>
+            </div>
+            
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <a href=""
+                            title=""></a>
+                     </div>
+            </div>
+        <!-- 7 -->
+        <div class="hot-recommend-item line">
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="" data-pid="" data-price="" >
+                    
+                    <img class="m_lazyload" src="images/1423022700101.jpg" alt="義美葡萄QQ糖巧克球160g" title="義美葡萄QQ糖巧克球160g, ">義美葡萄QQ糖巧克球160g
+                </a>
+            </div>
+            
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <a href=""
+                            title=""></a>
+                     </div>
+            </div>
+        <!-- 8 -->
+        <div class="hot-recommend-item line">
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="" data-pid="" data-price="" >
+                    <img class="m_lazyload" src="images/1423053500101.jpg" alt="義美超大葡萄乾巧克力(牛奶巧克力)144g" title="義美超大葡萄乾巧克力(牛奶巧克力)144g, ">義美超大葡萄乾巧克力(牛奶巧克力)144g
+                    
+                </a>
+            </div>
+            
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <a href=""
+                            title=""></a>
+                     </div>
+            </div>
+        <!-- 9 -->
+        <div class="hot-recommend-item line">
+            <div class="box-img">
+                <a class="gtm-product-alink" style="position: relative;"
+                    href="" data-pid="" data-price="" >
+                    
+                    <img class="m_lazyload" src="images/1423018300101.png" alt="健達繽紛樂(白)5入裝195g" title="健達繽紛樂(白)5入裝195g, ">健達繽紛樂(白)5入裝195g
+                    
+                </a>
+            </div>
+            
+            <div class="desc-operation-wrapper">
+
+                <div class="commodity-desc">
+                    <a href=""
+                            title=""></a>
+                     </div>
+            </div>
+        </div>
+
+
+        <div id="footer"></div>
+    </div>
+
+
+    
+
+</body>
+
+</html>

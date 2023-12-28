@@ -1,3 +1,6 @@
+# 這是用來抓家樂福巧克力圖片及文字的爬蟲檔案
+# 爬完資料寫進CSV後 又改成抓圖片  邊爬邊改 成功了就註解掉 所以很亂
+
 import urllib.request as req
 from bs4 import BeautifulSoup
 import time

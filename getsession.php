@@ -1,5 +1,5 @@
 <title>這是台購物車</title>
-
+<style>* { background-color:lightgoldenrodyellow}</style>
 <?php
 session_start();
 
@@ -36,7 +36,8 @@ if (isset($_GET["shoppingItem"])){
     echo "<br>送出購物車<br>";
     $_SESSION['shoppingCart'] = $shoppingCart;
 
-    header("Location: ./test2.php");    
+    //返回商品頁面
+    //header("Location: ./test2.php");    
     
     } else {
         //echo "沒有收到商品<br>";
@@ -46,7 +47,7 @@ if (isset($_GET["shoppingItem"])){
             //print_r($_SESSION['shoppingCart']);
 
             $tempArray = $_SESSION['shoppingCart'];
-            echo  "<table border='5px'> ";
+            echo  "<table id='productTable' border='5px'> ";
             echo  "<tr><th>編號</th><th>圖片</th><th>品名</th><th>價格</th><th>購買數量</th><th>金額</th><tr>";
             
 
@@ -60,17 +61,14 @@ if (isset($_GET["shoppingItem"])){
                 $sub_total = intval($productDetail['Data_price']) * intval($productDetail['Data_quantity']); 
                 echo  "<td>".$sub_total."</td>";
 
-                echo "<td><input type='button'  onclick='functiontest(this.value)' name='".$productId."' value='刪除物品' ></td>";
+                echo "<td><input type='button'  onclick='function1(this.name)' name='".$productId."' value='刪除物品' ></td>";
     
             } echo "</tr></table>";
         }else{
-            echo "目前沒有購物車";
-            
+            //echo "目前沒有購物車";
+            echo "<script language='javascript'>alert('購物車內尚無商品 請加入一些商品至購物車內'); location.href='./test2.php'</script>";
+            //header("Location: ./test2.php"); 
         };
-
-
-        
-     
 }   
 ?>
 
@@ -78,7 +76,8 @@ if (isset($_GET["shoppingItem"])){
 
 
 
-<?php 
+<?php
+
     function addToCart($a){
         global $shoppingCart;
         $shoppingCart[$a[0]] = array("Data_pid"=>$a[1],"Data_name"=>$a[2],"Data_price"=>$a[3],"Data_quantity"=>$a[4]) ;
@@ -87,28 +86,53 @@ if (isset($_GET["shoppingItem"])){
     }
 
     function delectProduct($id){
-        //global $shoppingCart;
-        echo "test1";
-        $tempArray = $_SESSION['shoppingCart'];
+
+        $tempArray =$_SESSION['shoppingCart'];
         unset($tempArray[$id]);
-        //unset($shoppingCart[1]);
+        
+        $_SESSION['shoppingCart'] = $tempArray;
     }
+    
     //delectProduct();
-    $b = $_SESSION['shoppingCart'];
-    unset($b[1]);
-   
-    print_r($_SESSION['shoppingCart'] );
-    echo "<hr>";
-    print_r($b );
-    echo "test2";
+    // $b = $_SESSION['shoppingCart'];
+    // unset($b[1]);
+    // echo "test1";
+    // print_r($_SESSION['shoppingCart'] );
+    // echo "<hr>";
+    // print_r($b );
+    // echo "test2";
     
 ?>
+<?php 
+    if (isset($_GET["removeId"])){
+        $_removeId = $_GET["removeId"];
+        delectProduct($_removeId);
 
-<!-- 還沒完成區域 -->
+        if (empty($_SESSION['shoppingCart'])){
+            
+            echo "<script language='javascript'>document.getElementById('productTable').innerHTML =''</script>";
+            //echo "購物車空了";
+            //header("Refresh:0");
+            header("Location: ./test2.php");
+            
+        } else{
+            //echo "刪完以後購物車還有東西";
+            header("Refresh:3");
+        }        
+    }
+
+    ?>
+
+
+<!-- 取得欲刪除商品的id 並get方式傳id給自己-->
+
 <script language="javascript" >
-    function functiontest(removeId){
-        let id = document.getElementById(removeId).name;
-     }
+    function function1(productId){
+        //alert(productId)
+     
+        location.href=`./getsession.php?removeId=${productId}`
+    }
+
 </script>
 
 <!-- <form id="f2" name="f2" method="post" action="<?php //$_SERVER['PHP_SELF']?>"> -->
