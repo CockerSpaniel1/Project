@@ -4,72 +4,81 @@
     <?php //session_start(); ?>
     <head>
         <meta charset="UTF-8">
-        <title>新手上路2</title>
+        <title>Chocolate Shop</title>
         <style>
-            /* td img { width:10px;} */
-            
-            * { background-color:lightgoldenrodyellow;
-                box-sizing: border-box; }
+            * { box-sizing:border-box;}
+            body{ 
+                    font-family:"微軟正黑體",sans-serif; 
+                    background-color:lightgoldenrodyellow;
+                    color:dimgray;
+                    padding:24px 10px;}
 
             #header{
-                    margin:20px 200px;
-                    border: 5px solid pink;
-                    height: 110px;
+                    margin:5px 70px;
+                    /* border: 5px solid pink; */           
+                    /* height: 110px; */
                     font-size: 26px;
                     font-weight: bold;
                     font-style: italic;
                     text-align: center;}
 
             #middle { 
+                /* width:60vw; */
                 margin:0px 200px;
-                /* height: 80vh; */
-                /* border: 5px solid black;*/
             } 
-
-            
+   
             #menu{
-                /* width:10vw   ; */
+                padding-left:10px;
+                padding-bottom:5px;
                 float:left;  
-                border: 5px solid red; 
+                border:2px solid dimgray;
+       
             }
 
             #flex-container{ 
-                width: 60vw; */
-                padding-left:50px;
-                border: 5px solid red;
+                width: 60vw;
+                padding-left:70px;
+                /* border: 1px solid dimgray; */
                 display: flex;
                 float:right;
                 flex-wrap: wrap;
                 
                 }
-            #product{ 
-                /* width: 910px; */
-                /* height: 80vh; */
-                border: 5px solid blue;
-                display: flex;
-                float:left;
-                flex-wrap: wrap;  
-                }
     
-            li { margin:5px;
+            li { margin:8px;
                 list-style-type:none;                
                 }
 
             .product{
-            width: 300px;
-            border: 5px solid black;
-            }
+                margin:5px;
+                padding-top:10px;
+                padding-bottom:10px;
+                padding-left:30px;
+                width: 300px; 
+                border: 2px solid dimgray; 
+            } 
 
-            .product_image {
+            .product_image {        
                 width: 200px;
                 height: 200px;
-                border: 5px solid green;
-                background-color:red;
+                border: 1px solid dimgrey;                   
                 /* display: flex; */
-                /* float: left;  */
                 /* flex-direction: row */
             }
-            
+            .product_description{
+                font-weight: bold;
+        }
+           
+            #product{ 
+                /* width: 910px; */
+                /* height: 80vh; */
+                /* padding-left:50px;*/
+                /* width: 60vw;
+                border: 5px solid orange;
+                display: flex;
+                float:right; 
+                flex-wrap: wrap;   */
+                }
         </style>
     </head>
             
@@ -77,7 +86,7 @@
     <body>    
 <div id="page">
     <div id="header">
-        <h1>巧克力專賣店</h1>
+        <h1>巧克力產品清單</h1>
         <!-- <img src="kuaikuai.jpg" width="100px" height="100px" style="float:left"  alt="這是張防Bug乖乖圖" > -->
     </div>
 
@@ -98,9 +107,6 @@
             <li><input type="button"  onclick="functiontest(this.value)" value="費列羅" ></li>
             <li><input type="button"  onclick="functiontest(this.value)" value="健達" ></li>
         </ul>
-
-        <!-- <h1>tset</h1> id="btnHide" -->
-
     
     <form id="f1" name="f1" method="post" action="<?php $_SERVER['PHP_SELF']?>">
         <hr>
@@ -127,10 +133,10 @@
         <input type="submit" id="order_lowest" name="order_lowest" value="由低到高" />
 
         <hr>
-        <a href="./getsession.php">前往購物車</a>
+        <a href="./shopping_cart.php">前往購物車</a>
         
 
-        <!--menu的 end div  -->
+        <!--menu的 end di-v  -->
         </div>       
 
 
@@ -164,7 +170,7 @@
         $num_per_page = $_POST['num_per_page'];
     }
    
-    //第一次載入時初始化start和end變數，之後則是用 表單submit之後的值 (為了排版只顯示9筆)
+    //第一次載入時初始化start和end變數，之後則是用 表單submit之後的值 (為了排版從10筆改成9筆)
     if (empty($_POST['start_number']) && empty($_POST['end_number']) ){
         $start_number = 1;
         $end_number = 9;
@@ -220,17 +226,14 @@
     };
     //echo $start_number."--".$end_number."--".$num_per_page;
     ?>
-    <div id="input_div" >
-            <!-- <input type="text" id="search_text" name="search_text" value="" placeholder="請輸入關鍵字或品牌名稱" /> -->
-            <!-- <input type="submit" id="search1" name="search1" value="搜尋" /> -->
-        </div>
-    <!-- <div id='flex-container' > -->
+ 
+    
     <?php
     //進行SQL查詢---------------------------------------------------------------------------------------
     $result = $conn->query($sql);
     
     echo "<div id='flex-container'>";
-    echo "<div id='product'>";
+    // echo "<div id='product'>";
     //echo "<table border='5px' > ";
     if ($result->num_rows > 0) {
     
@@ -269,11 +272,9 @@
     
 
     ?>
-            <!--flex-container的 end div  -->
-            </div>
+            <!--product的 end di-v  -->
+            <!-- </div> -->
         
-        
-
         <!-- 下面三個start,end ,number 為第二次以後載入頁面，要列出的資料開頭 結束 及 每頁呈現筆數   -->
         <input type="hidden" name="start_number"  value="<?php echo $start_number; ?>">
         <input type="hidden"  name="end_number"  value="<?php echo $end_number; ?>">
@@ -283,11 +284,13 @@
         <!-- <input type="text"  name="shoppingCart"  value="<?php //print_r($shoppingCart); ?>"> -->
 
     </form>
-    <!-- content的 end div  -->
+    <!-- flex-container end di-v  -->
     </div>
-
-    <!--page的 end div  -->
+    <!-- middle end di-v  -->
     </div> 
+    <!-- page end di-v  -->
+    </div> 
+    
 
     <?php   
         // if (!isset($_SESSION["shoppingCart"])){
@@ -298,36 +301,23 @@
         // }
         // $shoppingCart = ["productId"=>array("productName", "productPrice", "productQuantity") ];   
         // $_SESSION["shoppingCart"] = $shoppingCart ?>
-    <?php
-         
-         //$shoppingCart = ["productId"=>array("productName", "productPrice", "productQuantity") ];
-        //$shoppingCart += [1,array(2,3,4)];
-        // if (!empty($_POST["shoppingCart"])){
-        //     $shoppingCart = [ ];
-        // echo "沒有購物推車";    
-        // print_r($shoppingCart);}
-        //if (isset($_SESSION["shoppingCart"]))
-        //{echo "YES";}else{echo "NO";}
-        ?>
+
 
 <!--以上 PHP區域  -------------------------------------------------------------------------------------------------------------------------- -->
 
     </body>
-    <!-- <a href="./searchDatabase.php?s1=義美" target="_blank">test123456</a> -->
+    <!--page的 end di-v  -->    
+    </div> 
 
-
-    <?php require_once 'searchDatabase.php';?>
+    <?php require_once 'search_brand.php';?>
 <!--以下Javascript 區域  -------------------------------------------------------------------------------------------------------------------------- -->   
     <script language="javascript" >
 
-    // $("#btnHide").click(function(){
-    // $("h1").hide();})
     //SELECT `chocolate`.`Data_brand`,COUNT(*) FROM `chocolate` Group BY `chocolate`.`Data_brand` ORDER BY COUNT(*) DESC;
-
     
     function functiontest(text){
         //alert(text);
-
+        //flex-container
         document.getElementById("flex-container").innerHTML = "";
         switch (text){
             case "義美":
@@ -395,23 +385,13 @@
             let productArray = stringArray.slice(1, -1).split(",");
             productArray.push(quantity);
 
-            location.href=`./getsession.php?shoppingItem=${productArray}`
+            location.href=`./shopping_cart.php?shoppingItem=${productArray}`
 
         } else {
-            alert("請選擇欲購買數量")
-        }
-
-        // for (a in productArray) {
-        //     alert(productArray[a]);
-        // }
- 
-        
-        }
+            alert("請選擇欲購買數量");
+        }  
+    }
 
 
-        //location.href = "http://localhost:8080/Project/searchDatabase.php" ;}
-        
-        //location.href="./searchDatabase.php?s1=義美";}
-        //document.getElementById("flex-container").innerHTML ="<?//php search('義美'); ?>" ;}
     </script>
     </html>

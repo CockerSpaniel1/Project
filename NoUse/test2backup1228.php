@@ -26,7 +26,7 @@
                 border: 5px solid red; }
 
             #flex-container{ 
-                width: 910px;
+                 width: 1200px; */
                 /* height: 80vh; */
                 border: 5px solid green;
                 display: flex;
