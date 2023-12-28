@@ -38,11 +38,6 @@
         } 
             
     } 
-
-    //$str2 = search("義美");
-    //$str2 .=  "HIHI22";
-    //echo $str2;
-    //return "<?php echo 'test123qweradsf' ?//>";
     //header("Location: ./test2.php");
     
     ?>
